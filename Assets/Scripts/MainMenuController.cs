@@ -1,4 +1,5 @@
 ﻿using Profile;
+using Tools;
 using UnityEngine;
 
 public class MainMenuController : BaseController
@@ -11,11 +12,14 @@ public class MainMenuController : BaseController
     {
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame);
+        _view.Init(StartGame, OnPurchase);
 
         var trailController = new TrailController();
         AddController(trailController);
+        _profilePlayer.Shop.OnSuccessPurchase.SubscribeOnChange(OnSuccessPurchase);
+        _profilePlayer.Shop.OnFailedPurchase.SubscribeOnChange(OnFailedPurchase);
     }
+
 
     private MainMenuView LoadView(Transform placeForUi)
     {
@@ -28,6 +32,25 @@ public class MainMenuController : BaseController
     private void StartGame()
     {
         _profilePlayer.CurrentState.Value = GameState.Game;
+    }
+    private void OnPurchase()
+    {
+        _profilePlayer.Shop.Buy("com.mycompany.cargame.SmallCoins");
+    }
+    private void OnSuccessPurchase()
+    {
+        Debug.Log("Purchase successful!");
+    }
+    private void OnFailedPurchase()
+    {
+        Debug.Log("Purchase failed!");
+    }
+
+    protected override void OnDispose()
+    {
+        _profilePlayer.Shop.OnSuccessPurchase.SubscribeOnChange(OnSuccessPurchase);
+        _profilePlayer.Shop.OnFailedPurchase.SubscribeOnChange(OnFailedPurchase);
+        base.OnDispose();
     }
 }
 

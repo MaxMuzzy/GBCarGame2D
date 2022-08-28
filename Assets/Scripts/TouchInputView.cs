@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TouchInputView : BaseInputView
 {
-    private float _speed = 0.0f;
+    private new float _speed = 0.0f;
     private float _tapAcceleration = 0.1f;
     private float _slowUpPerSecond = 0.5f;
 
