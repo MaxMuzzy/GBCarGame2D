@@ -332,6 +332,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 693758133}
+  _items:
+  - {fileID: 11400000, guid: ceca9c596a5d71f4eb0210b155a9a4c1, type: 2}
+  - {fileID: 11400000, guid: e9322d0a37c8510418f44f6c175fecce, type: 2}
+  - {fileID: 11400000, guid: e4825c8b5d3cbbc4795ff7b3d07d13ef, type: 2}
+  _upgrades:
+  - {fileID: 11400000, guid: 04d5c9cc14acbbb47bf2b5313b674d8e, type: 2}
+  - {fileID: 11400000, guid: d660f3d41f2f53e48a9408fa9cfc32a4, type: 2}
+  _abilities:
+  - {fileID: 11400000, guid: a42bacd8ef749844186d006b90d48f98, type: 2}
 --- !u!4 &1002511161
 Transform:
   m_ObjectHideFlags: 0
