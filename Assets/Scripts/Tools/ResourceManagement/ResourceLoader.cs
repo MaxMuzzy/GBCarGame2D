@@ -6,4 +6,13 @@ public static class ResourceLoader
     {
         return Resources.Load<GameObject>(path.PathResource);
     }
+    public static T LoadObject<T>(ResourcePath path) where T : Object
+    {
+        return Resources.Load<T>(path.PathResource);
+    }
+    public static T LoadAndInstantiate<T>(ResourcePath path, Transform parent) where T : MonoBehaviour
+    {
+        var c = LoadPrefab(path).GetComponent<T>();
+        return GameObject.Instantiate<T>(c, parent);
+    }
 } 

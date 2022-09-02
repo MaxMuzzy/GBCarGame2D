@@ -6,18 +6,10 @@ public class TrailController : BaseController
 {
     public TrailController()
     {
-        _view = LoadView();
+        _view = ResourceLoader.LoadAndInstantiate<TrailView>(_viewPath, null);
         _view.Init();
     }
 
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Trail" };
     private TrailView _view;
-
-    private TrailView LoadView()
-    {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
-        AddGameObjects(objView);
-
-        return objView.GetComponent<TrailView>();
-    }
 }

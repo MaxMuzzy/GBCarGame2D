@@ -3,26 +3,23 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventorySelector : BaseController
+public class InventorySelector : BaseController, IInventorySelector
 {
-    public readonly IInventoryModel _model;
-    private readonly IItemsRepository _repository;
-    private readonly List<IItem> _itemsToReturn;
+    public IInventoryModel _model { get; }
+    private readonly IRepository<int, IItem> _repository;
     private readonly ProfilePlayer _player;
-    private readonly Transform _placeForUi;
     private readonly InventorySelectorView _view;
-    private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Selector" };
-    public InventorySelector(IItemsRepository repository, IInventoryModel model, ProfilePlayer player, Transform placeForUi, InventorySelectorView view)
+    public InventorySelector(IRepository<int, IItem> repository, IInventoryModel model, ProfilePlayer player, InventorySelectorView view)
     {
         _model = model;
         _repository = repository;
         _player = player;
-        _placeForUi = placeForUi;
         _view = view;
         _view.Init(EquipFastTire, EquipSlowTire, EquipWeapon, ClearInventory);
     }
     public void EquipFastTire()
     {
+        // 1 id быстрой шины
         if (_repository.Items.TryGetValue(1, out var item))
             _model.EquipItem(item);
         else
@@ -30,6 +27,7 @@ public class InventorySelector : BaseController
     }
     public void EquipSlowTire()
     {
+        // 2 id медленной шины
         if (_repository.Items.TryGetValue(2, out var item))
             _model.EquipItem(item);
         else
@@ -37,6 +35,7 @@ public class InventorySelector : BaseController
     }
     public void EquipWeapon()
     {
+        // 123 id оружия
         if (_repository.Items.TryGetValue(123, out var item))
         {
             _player.CanBomb = true;

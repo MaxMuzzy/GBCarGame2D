@@ -3,29 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AbilitiesRepository : BaseController, IAbilityRepository
+public partial class AbilitiesRepository : BaseRepository<IAbility, AbilityItemCfg>
 {
-    private readonly List<AbilityItemCfg> _abilities;
-    public IReadOnlyDictionary<int, IAbility> AbilitiesMap => map;
+    public AbilitiesRepository(List<AbilityItemCfg> configs) : base(configs) { }
 
-    private Dictionary<int, IAbility> map;
-
-    public AbilitiesRepository(List<AbilityItemCfg> abilities)
-    {
-        _abilities = abilities;
-        PopulateAbilities(_abilities, ref map);
-    }
-
-    private void PopulateAbilities(List<AbilityItemCfg> abilities, ref Dictionary<int, IAbility> dictinary)
-    {
-        dictinary = new Dictionary<int, IAbility>();
-        foreach (var config in _abilities)
-        {
-            dictinary[config.Id] = CreateAbility(config);
-        }
-    }
-
-    private IAbility CreateAbility(AbilityItemCfg config)
+    protected override IAbility CreateItem(AbilityItemCfg config)
     {
         switch (config.Type)
         {
