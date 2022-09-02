@@ -16,17 +16,13 @@ public class Root : MonoBehaviour
             Id = "com.mycompany.cargame.SmallCoins"
         }
     };
-    [SerializeField] private List<ItemCfg> _items;
-    [SerializeField] private List<UpgradeItemCfg> _upgrades;
-    [SerializeField] private List<AbilityItemCfg> _abilities;
-
     private MainController _mainController;
 
     private void Awake()
     {
         var profilePlayer = new ProfilePlayer(15f, new ShopTools(_products));
         profilePlayer.CurrentState.Value = GameState.Start;
-        _mainController = new MainController(_placeForUi, profilePlayer, _items, _upgrades, _abilities);
+        _mainController = new MainController(_placeForUi, profilePlayer);
     }
 
     protected void OnDestroy()

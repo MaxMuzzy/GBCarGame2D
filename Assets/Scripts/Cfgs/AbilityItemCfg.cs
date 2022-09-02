@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AbilityItemCfg", menuName = "AbilityItemCfg")]
-public class AbilityItemCfg : ScriptableObject
+public class AbilityItemCfg : ScriptableObject, IConfig
 {
     public ItemCfg ItemCfg;
     public GameObject View;

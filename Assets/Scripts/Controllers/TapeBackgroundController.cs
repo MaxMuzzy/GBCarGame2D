@@ -6,7 +6,7 @@ public class TapeBackgroundController : BaseController
     public TapeBackgroundController(IReadOnlySubscriptionProperty<float> leftMove, 
         IReadOnlySubscriptionProperty<float> rightMove)
     {
-        _view = LoadView();
+        _view = ResourceLoader.LoadAndInstantiate<TapeBackgroundView>(_viewPath, null);
         _diff = new SubscriptionProperty<float>();
         
         _leftMove = leftMove;
@@ -31,15 +31,6 @@ public class TapeBackgroundController : BaseController
         
         base.OnDispose();
     }
-
-    private TapeBackgroundView LoadView()
-    {
-        var objView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath));
-        AddGameObjects(objView);
-        
-        return objView.GetComponent<TapeBackgroundView>();
-    }
-
     private void Move(float value)
     {
         _diff.Value = value;

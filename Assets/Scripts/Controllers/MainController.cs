@@ -4,14 +4,12 @@ using System.Collections.Generic;
 
 public class MainController : BaseController
 {
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, List<ItemCfg> items, List<UpgradeItemCfg> upgrades, List<AbilityItemCfg> abilities)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
     {
         _profilePlayer = profilePlayer;
         _profilePlayer.CanBomb = false;
         _placeForUi = placeForUi;
-        _itemCfgs = items;
-        _upgradeCfgs = upgrades;
-        _abilitiesCfgs = abilities;
+        _abilitiesCfgs = DataSourceLoader.LoadCfgs<AbilityItemCfg>(_abilitiesPath);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
@@ -20,9 +18,9 @@ public class MainController : BaseController
     private GameController _gameController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
-    private readonly List<ItemCfg> _itemCfgs;
-    private readonly List<UpgradeItemCfg> _upgradeCfgs;
+
     private readonly List<AbilityItemCfg> _abilitiesCfgs;
+    private readonly ResourcePath _abilitiesPath = new ResourcePath { PathResource = "Configs/Sources/AbilitiesSource" };
     protected override void OnDispose()
     {
         _mainMenuController?.Dispose();
@@ -36,7 +34,7 @@ public class MainController : BaseController
         switch (state)
         {
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _itemCfgs, _upgradeCfgs);
+                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose();
                 break;
             case GameState.Game:

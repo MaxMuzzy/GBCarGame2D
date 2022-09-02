@@ -5,13 +5,11 @@ using UnityEngine;
 public class InventoryController : BaseController, IInventoryController
 {
     private readonly IInventoryModel _inventoryModel;
-    private readonly IItemsRepository _itemsRepository;
     private readonly IInventoryView _inventoryView;
 
-    public InventoryController(IInventoryModel model, IItemsRepository repository, IInventoryView view)
+    public InventoryController(IInventoryModel model, IInventoryView view)
     {
         _inventoryModel = model;
-        _itemsRepository = repository;
         _inventoryView = view;
     }
 
@@ -21,6 +19,6 @@ public class InventoryController : BaseController, IInventoryController
             _inventoryModel.EquipItem(item);
 
         var equippedItems = _inventoryModel.GetEquippedItems();
-        _inventoryView.Display(items);
+        _inventoryView.Display(equippedItems);
     }
 }

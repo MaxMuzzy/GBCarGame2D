@@ -5,36 +5,26 @@ using UnityEngine;
 public class ShedController : BaseController, IShedController
 {
     private readonly Car _car;
-    private readonly List<ItemCfg> _itemCfgs;
-    private readonly List<UpgradeItemCfg> _upgradeCfgs;
     private readonly ProfilePlayer _player;
     private IInventoryModel _inventoryModel;
-    private IItemsRepository _itemsRepository;
-    private IInventoryView _inventoryView;
+    private IRepository<int, IItem> _itemsRepository;
+    private IRepository<int, IUpgradeHandler> _upgradeRepository;
     private IInventoryController _inventoryController;
-    private InventorySelector _inventorySelector;
-    private UpgradeHandlerRepository _upgradeRepository;
-    public ShedController(Car car, List<ItemCfg> itemCfgs, List<UpgradeItemCfg> upgradeCfgs, ProfilePlayer player, Transform placeForUi, InventorySelectorView selectorView)
+    private IInventorySelector _inventorySelector;
+    public ShedController(IRepository<int, IItem> itemRepository,
+                          IRepository<int, IUpgradeHandler> upgradeRepository,
+                          ProfilePlayer player,
+                          IInventoryController inventory,
+                          IInventoryModel model,
+                          IInventorySelector selector)
     {
         _player = player;
-        _car = car;
-        _itemCfgs = itemCfgs;
-        _upgradeCfgs = upgradeCfgs;
-        _inventoryModel = new InventoryModel();
-        _itemsRepository = new ItemsRepository(itemCfgs);
-        _inventoryView = new InventoryView();
-
-        var inventory = new InventoryController(_inventoryModel, _itemsRepository, _inventoryView);
-        AddController(inventory);
+        _car = player.CurrentCar;
+        _itemsRepository = itemRepository;
+        _upgradeRepository = upgradeRepository;
         _inventoryController = inventory;
-
-        var upgrades = new UpgradeHandlerRepository(_upgradeCfgs);
-        _upgradeRepository = upgrades;
-        AddController(upgrades);
-
-        var selector = new InventorySelector(_itemsRepository, _inventoryModel, _player, placeForUi, selectorView);
+        _inventoryModel = model;
         _inventorySelector = selector;
-        AddController(selector);
     }
     public void Enter()
     {
@@ -51,7 +41,7 @@ public class ShedController : BaseController, IShedController
     {
         foreach (var item in inventoryModel.GetEquippedItems())
         {
-            if (_upgradeRepository.UpgradeItems.TryGetValue(item.Id, out var handler))
+            if (_upgradeRepository.Items.TryGetValue(item.Id, out var handler))
             {
                 handler.Upgrade(_car);
             }

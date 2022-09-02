@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "UpgradeItem", menuName = "UpgradeItem")]
-public class UpgradeItemCfg : ScriptableObject
+public class UpgradeItemCfg : ScriptableObject, IConfig
 {
     public ItemCfg _itemConfig;
 

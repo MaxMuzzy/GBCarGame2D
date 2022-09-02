@@ -3,26 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class UpgradeHandlerRepository : BaseController
+public class UpgradeHandlerRepository : BaseRepository<IUpgradeHandler, UpgradeItemCfg>
 {
-    public IReadOnlyDictionary<int, IUpgradeHandler> UpgradeItems => _upgradeItems;
+    public UpgradeHandlerRepository(List<UpgradeItemCfg> configs) : base(configs) { }
 
-    private Dictionary<int, IUpgradeHandler> _upgradeItems = new Dictionary<int, IUpgradeHandler>();
-
-    public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemCfg> configs)
-    {
-        PopulateItems(ref _upgradeItems, configs);
-    }
-
-    private void PopulateItems(ref Dictionary<int, IUpgradeHandler> upgradeItems, IReadOnlyList<UpgradeItemCfg> cfgs)
-    {
-        foreach (var config in cfgs)
-        {
-            upgradeItems[config.Id] = CreateHandler(config);
-        }
-    }
-
-    private IUpgradeHandler CreateHandler(UpgradeItemCfg cfg)
+    protected override IUpgradeHandler CreateItem(UpgradeItemCfg cfg)
     {
         switch (cfg.UpgradeType)
         {
@@ -34,5 +19,4 @@ public class UpgradeHandlerRepository : BaseController
                 throw new ArgumentOutOfRangeException();
         }
     }
-
 }

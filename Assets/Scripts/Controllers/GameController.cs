@@ -18,7 +18,10 @@ public class GameController : BaseController
         AddController(carController);
 
         var repository = new AbilitiesRepository(abilities);
+        AddController(repository);
+
         var abilitiesController = new AbilitiesController(carController, repository, profilePlayer);
+        AddController(abilitiesController);
     }
 }
 
