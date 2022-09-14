@@ -23,5 +23,10 @@ internal class InputJoystickView : BaseInputView
             OnRightMove(moveStep);
         else if (moveStep < 0)
             OnLeftMove(moveStep);
+        else if (moveStep == 0)
+        {
+            _isMovingLeft = false;
+            _isMovingRight = false;
+        }
     }
 }

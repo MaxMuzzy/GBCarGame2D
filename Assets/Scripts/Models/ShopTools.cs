@@ -41,8 +41,8 @@ namespace Shop
         }
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
-            bool validPurchase = false;
-#if UNITY_IOS || UNITY_ANDROID
+            //bool validPurchase = false;
+#if (UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
             CrossPlatformValidator validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
             try 
             {

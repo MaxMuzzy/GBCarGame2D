@@ -50,7 +50,7 @@ public class TouchInputView : BaseInputView
     {
         if(_speed < 0)
             OnLeftMove(_speed);
-        else
+        else if(_speed > 0)
             OnRightMove(_speed);
     }
 
