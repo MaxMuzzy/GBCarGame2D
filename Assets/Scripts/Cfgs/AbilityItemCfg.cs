@@ -9,6 +9,8 @@ public class AbilityItemCfg : ScriptableObject, IConfig
     public GameObject View;
     public AbilityType Type;
     public float Value;
+    public float Duration;
+    public float Strength;
     public int Id => ItemCfg.Id;
 }
 public enum AbilityType

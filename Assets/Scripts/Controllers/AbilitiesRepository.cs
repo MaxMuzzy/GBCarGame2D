@@ -14,7 +14,7 @@ public partial class AbilitiesRepository : BaseRepository<IAbility, AbilityItemC
             case AbilityType.None:
                 return new StubAbility();
             case AbilityType.Gun:
-                return new GunAbility(config.View, config.Value);
+                return new GunAbility(config.View, config.Value, config.Duration);
             default:
                 throw new ArgumentOutOfRangeException();
         }
