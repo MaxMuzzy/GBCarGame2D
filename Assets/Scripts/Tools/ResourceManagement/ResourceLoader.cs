@@ -15,4 +15,8 @@ public static class ResourceLoader
         var c = LoadPrefab(path).GetComponent<T>();
         return GameObject.Instantiate<T>(c, parent);
     }
+    public static T LoadView<T>(ResourcePath path) where T : MonoBehaviour
+    {
+        return LoadPrefab(path).GetComponent<T>();
+    }
 } 

@@ -7,6 +7,7 @@ public class InputGameController : BaseController
     {
         _view = ResourceLoader.LoadAndInstantiate<BaseInputView>(_viewPath, null);
         _view.Init(leftMove, rightMove, car.Speed);
+        AddGameObjects(_view.gameObject);
         var carAnimController = new CarAnimationController(carObj, _view);
         AddController(carAnimController);
     }

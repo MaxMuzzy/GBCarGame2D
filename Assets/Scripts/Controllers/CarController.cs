@@ -8,6 +8,7 @@ public class CarController : BaseController, IAbilityActivator
     public CarController()
     {
         _carView = ResourceLoader.LoadAndInstantiate<CarView>(_viewPath, null);
+        AddGameObjects(_carView.gameObject);
     }
 
     public GameObject GetViewObject()

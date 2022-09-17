@@ -10,13 +10,14 @@ public class AbilitiesController : BaseController
     private readonly ProfilePlayer _player;
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Abilities" };
 
-    public AbilitiesController(IAbilityActivator activator, IRepository<int, IAbility> repository, ProfilePlayer player)
+    public AbilitiesController(IAbilityActivator activator, IRepository<int, IAbility> repository, ProfilePlayer player, Transform placeForUi)
     {
         _activator = activator;
         _repository = repository;
         _player = player;
-        _view = ResourceLoader.LoadAndInstantiate<AbilitiesView>(_viewPath, null);
+        _view = ResourceLoader.LoadAndInstantiate<AbilitiesView>(_viewPath, placeForUi);
         _view.Init(BombAbility);
+        AddGameObjects(_view.gameObject);
     }
     private void BombAbility()
     {

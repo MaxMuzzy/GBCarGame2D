@@ -16,7 +16,7 @@ public class MainMenuController : BaseController
     {
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame, OnPurchase);
+        _view.Init(StartGame, OnPurchase, OpenRewards);
 
 
         var trailController = new TrailController();
@@ -28,6 +28,7 @@ public class MainMenuController : BaseController
         _shedController = ConfigureShedController(placeForUi, _profilePlayer, _selectorView);
         _shedController.Enter();
     }
+
 
     // приходится делать новый метод тк менюшки не очистятся после перехода в игру
     private MainMenuView LoadView(Transform placeForUi)
@@ -54,6 +55,10 @@ public class MainMenuController : BaseController
         return new ShedController(itemsRepository, upgradeRepository, player, inventoryController, inventoryModel, selector);
     }
 
+    private void OpenRewards()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Reward;
+    }
     private void StartGame()
     {
         _shedController.Exit();

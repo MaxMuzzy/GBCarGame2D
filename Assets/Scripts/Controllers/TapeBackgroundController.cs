@@ -7,6 +7,7 @@ public class TapeBackgroundController : BaseController
         IReadOnlySubscriptionProperty<float> rightMove)
     {
         _view = ResourceLoader.LoadAndInstantiate<TapeBackgroundView>(_viewPath, null);
+        AddGameObjects(_view.gameObject);
         _diff = new SubscriptionProperty<float>();
         
         _leftMove = leftMove;
