@@ -50,4 +50,10 @@ public class CarAnimationController : BaseController
         }
     }
 
+    protected override void OnDispose()
+    {
+        UpdateManager.UnsubscribeFromUpdate(OnUpdate);
+        base.OnDispose();
+    }
+
 }

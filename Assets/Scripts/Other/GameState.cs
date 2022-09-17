@@ -4,6 +4,8 @@
     {
         None,
         Start,
+        Reward,
+        Fight,
         Game
     }
 }
