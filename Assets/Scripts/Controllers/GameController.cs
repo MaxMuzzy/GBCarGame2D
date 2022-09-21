@@ -12,8 +12,9 @@ public class GameController : BaseController
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
-        _gameView = ResourceLoader.LoadAndInstantiate<GameView>(new ResourcePath() { PathResource = "Prefabs/GameView" }, _placeForUi);
-        _gameView.Init(StartFight);
+        //_gameView = ResourceLoader.LoadAndInstantiate<GameView>(new ResourcePath() { PathResource = "Prefabs/GameView" }, _placeForUi);
+        _gameView = AddressablesResourceLoader.CreatePrefab("GameView", _placeForUi).GetComponent<GameView>();
+        _gameView.Init(StartFight); 
         AddGameObjects(_gameView.gameObject);
 
         var leftMoveDiff = new SubscriptionProperty<float>();
@@ -37,6 +38,11 @@ public class GameController : BaseController
     private void StartFight()
     {
         _profilePlayer.CurrentState.Value = GameState.Fight;
+    }
+    protected override void OnDispose()
+    {
+        AddressablesResourceLoader.OnDestroy();
+        base.OnDispose();
     }
 }
 
