@@ -6,7 +6,8 @@ public class TapeBackgroundController : BaseController
     public TapeBackgroundController(IReadOnlySubscriptionProperty<float> leftMove, 
         IReadOnlySubscriptionProperty<float> rightMove)
     {
-        _view = ResourceLoader.LoadAndInstantiate<TapeBackgroundView>(_viewPath, null);
+        //_view = ResourceLoader.LoadAndInstantiate<TapeBackgroundView>(_viewPath, null);
+        _view = AddressablesResourceLoader.CreatePrefab("Background", null).GetComponent<TapeBackgroundView>();
         AddGameObjects(_view.gameObject);
         _diff = new SubscriptionProperty<float>();
         

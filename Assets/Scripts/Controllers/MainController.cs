@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.AddressableAssets;
 
 public class MainController : BaseController
 {
@@ -11,9 +12,10 @@ public class MainController : BaseController
         _profilePlayer.CanBomb = false;
         _placeForUi = placeForUi;
         _abilitiesCfgs = DataSourceLoader.LoadCfgs<AbilityItemCfg>(new ResourcePath { PathResource = "Configs/Sources/AbilitiesSource" });
+        _prefabsCfgs = DataSourceLoader.LoadCfgs<AddressablePrefabCfg>(new ResourcePath { PathResource = "Configs/Sources/AddressablePrefabsSource" });
+        AddressablesResourceLoader.PopulatePrefabs(_prefabsCfgs);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
-
     }
 
     private MainMenuController _mainMenuController;
@@ -25,8 +27,7 @@ public class MainController : BaseController
     private readonly ProfilePlayer _profilePlayer;
 
     private readonly List<AbilityItemCfg> _abilitiesCfgs;
-    
-
+    private readonly List<AddressablePrefabCfg> _prefabsCfgs;
 
     protected override void OnDispose()
     {

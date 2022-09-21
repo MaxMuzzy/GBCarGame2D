@@ -1,0 +1,73 @@
+ManifestFileVersion: 0
+CRC: 2852214519
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9f3e1c3f07481b166338e6471a986ce2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5c108714b0ece65c8a9697d9d96601ee
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c9d3d5323b0fb4440ab7b94047597c7c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 00c3c865782347f41b6358d9fba14b48, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 482101a670e022b419b2ac902e1e5f10, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71398ce7fbc3a5b4fa50b50bd54317a7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cff9a97b6dbf2c4409a29a8407b00b00, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 74106a2cd0b435248ae84445a762d47d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 29390b7e9f32f334ea9f7cd2e672464a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1e0d4b2fd2dd6564eb3af619253b7c94, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources_moved/Prefabs/background.prefab
+- Assets/Resources/Prefabs/CannonBomb.prefab
+- Assets/Resources_moved/Prefabs/Abilities.prefab
+- Assets/Resources_moved/Prefabs/StickControl.prefab
+- Assets/Resources_moved/Prefabs/GameView.prefab
+- Assets/Resources_moved/Prefabs/Car.prefab
+Dependencies: []
