@@ -15,8 +15,8 @@ public class AbilitiesController : BaseController
         _activator = activator;
         _repository = repository;
         _player = player;
-        //_view = ResourceLoader.LoadAndInstantiate<AbilitiesView>(_viewPath, placeForUi);\
-        _view = AddressablesResourceLoader.CreatePrefab("Abilities", placeForUi).GetComponent<AbilitiesView>();
+        _view = ResourceLoader.LoadAndInstantiate<AbilitiesView>(_viewPath, placeForUi);
+        //_view = AddressablesResourceLoader.CreatePrefab("Abilities", placeForUi).GetComponent<AbilitiesView>();
         _view.Init(BombAbility);
         AddGameObjects(_view.gameObject);
     }

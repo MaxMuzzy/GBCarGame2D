@@ -4,9 +4,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Notifications.Android;
+using Unity.Notifications.iOS;
 
 public class DailyRewardController : BaseController
 {
+    private const string _androidNotifierId = "android_notifier_id";
+    private const string _iOSNotifierId = "ios_notifier_id";
+
     private readonly ProfilePlayer _profilePlayer;
     private readonly CurrencyWindow _currency;
     private readonly RewardView _view;
@@ -60,6 +65,7 @@ public class DailyRewardController : BaseController
             {
                 _profilePlayer.LastDailyRewardTime.Value = null;
                 _profilePlayer.CurrentDailyActiveSlot.Value = 0;
+                CreateNotifications();
             }
             else if (timeSpan.Seconds < _view.TimeDailyCooldown)
             {
@@ -135,6 +141,52 @@ public class DailyRewardController : BaseController
         _profilePlayer.CurrentDailyActiveSlot.Value = (_profilePlayer.CurrentDailyActiveSlot.Value + 1) % _view.DailyRewards.Count;
         RefreshRewardState();
     }
+    private void CreateNotifications()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+            CreateAndroidNotification();
+        if (Application.platform == RuntimePlatform.OSXPlayer)
+            CreateIOSNotification();
+    }
+
+    private void CreateAndroidNotification()
+    {
+        var androidSettingChannel = new AndroidNotificationChannel
+        {
+            Id = _androidNotifierId,
+            Name = "Game Notifier",
+            Importance = Importance.High,
+            CanBypassDnd = true,
+            CanShowBadge = true,
+            Description = "Your reward is ready to be collected!",
+            EnableLights = true,
+            EnableVibration = true,
+            LockScreenVisibility = LockScreenVisibility.Public
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(androidSettingChannel);
+        var androidSettingsNotification = new AndroidNotification
+        {
+            Title = "Get in here!",
+            Color = Color.white,
+            RepeatInterval = TimeSpan.FromDays(1)
+        };
+        AndroidNotificationCenter.SendNotification(androidSettingsNotification, _androidNotifierId);
+    }
+    private void CreateIOSNotification()
+    {
+        var iosSettingsNotification = new iOSNotification
+        {
+            Identifier = "android_notifier_id",
+            Title = "Game Notifier",
+            Subtitle = "Subtitle notifier",
+            Body = "Your reward is ready to be collected!",
+            Badge = 1,
+            Data = "23/09/2022",
+            ForegroundPresentationOption = PresentationOption.Alert | PresentationOption.Badge | PresentationOption.Sound
+        };
+        iOSNotificationCenter.ScheduleNotification(iosSettingsNotification);
+    }
+
     protected override void OnDispose()
     {
         UpdateManager.UnsubscribeFromUpdate(Update);
