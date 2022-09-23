@@ -12,8 +12,8 @@ public class GameController : BaseController
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
-        //_gameView = ResourceLoader.LoadAndInstantiate<GameView>(new ResourcePath() { PathResource = "Prefabs/GameView" }, _placeForUi);
-        _gameView = AddressablesResourceLoader.CreatePrefab("GameView", _placeForUi).GetComponent<GameView>();
+        _gameView = ResourceLoader.LoadAndInstantiate<GameView>(new ResourcePath() { PathResource = "Prefabs/GameView" }, _placeForUi);
+        //_gameView = AddressablesResourceLoader.CreatePrefab("GameView", _placeForUi).GetComponent<GameView>();
         _gameView.Init(StartFight); 
         AddGameObjects(_gameView.gameObject);
 

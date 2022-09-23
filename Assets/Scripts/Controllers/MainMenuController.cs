@@ -11,6 +11,7 @@ public class MainMenuController : BaseController
     private InventorySelectorView _selectorView;
 
     private ShedController _shedController;
+    private LocalizationController _localizationController;
 
     public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
     {
@@ -27,6 +28,9 @@ public class MainMenuController : BaseController
 
         _shedController = ConfigureShedController(placeForUi, _profilePlayer, _selectorView);
         _shedController.Enter();
+
+        _localizationController = new LocalizationController(placeForUi);
+        AddController(_localizationController);
     }
 
 
